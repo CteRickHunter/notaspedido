@@ -20,8 +20,8 @@ class CreatePedidosTable extends Migration
             $table->time('horaPed');
             $table->biginteger('user_id');
             $table->string('nombreUsu');
-            $table->decimal('descuentoPed');
-            $table->string('transportePed');
+            $table->decimal('descuentoPed',6,2);
+            $table->string('transportePed',20);
             $table->boolean('tieneDeuda');
             $table->text('notaPed');
             $table->timestamps();
