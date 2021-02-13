@@ -18,6 +18,7 @@ class CreateItempedidosTable extends Migration
             $table->biginteger('pedido_id');
             $table->integer('lineaItem');
             $table->biginteger('producto_id');
+            $table->integer('cantidadPro');
             $table->decimal('precioItem',12,2);
             $table->boolean('esBonificado');
             $table->timestamps();
