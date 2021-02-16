@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AgregaDescuentoUsers extends Migration
+class AgregaCategoriaEnUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -15,8 +15,7 @@ class AgregaDescuentoUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->decimal('descuento');
-            
+            $table->integer('categoria');
         });
     }
 
@@ -29,7 +28,7 @@ class AgregaDescuentoUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            
+            $table->dropColumn('categoria');
         });
     }
 }
