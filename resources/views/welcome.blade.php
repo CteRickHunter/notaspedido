@@ -92,7 +92,7 @@
                 <div class="title m-b-md">
                  <!--   Pharmavet -->
                 </div>
-
+                <H1> Sistema de Recepción de pedidos </H1>
                 <!--<div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
                     <a href="https://laracasts.com">Laracasts</a>

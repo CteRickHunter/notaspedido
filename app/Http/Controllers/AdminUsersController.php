@@ -39,7 +39,10 @@ class AdminUsersController extends Controller
     public function store(Request $request)
     {
         //
-        User::create($request->all());
+        $entrada=$request->all();
+        $entrada['password']=bcrypt($request->password);
+
+        User::create($entrada);
         return redirect('/admin/user');
     }
 
@@ -63,6 +66,8 @@ class AdminUsersController extends Controller
     public function edit($id)
     {
         //
+        $user=User::findOrFail($id);
+        return view('admin.users.edit', compact('user'));
     }
 
     /**
@@ -75,6 +80,13 @@ class AdminUsersController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $user=User::findOfFail($id);
+        $entrada=$request->all();
+        $entrada['password']=bcrypt($request->password);
+
+        $user->update($entrada);
+
+        return redirect('/admin/user');
     }
 
     /**
@@ -86,5 +98,8 @@ class AdminUsersController extends Controller
     public function destroy($id)
     {
         //
+        $user=User::findOfFail($id);
+        $user->delete();
+        return redirect('/admin/user');
     }
 }
