@@ -22,3 +22,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('admin/user','AdminUsersController');
 Route::resource('user/pedidos','PedidosController');
+Route::resource('user/clientes','ClientesController');
+Route::resource('user/productos','ProductosController');

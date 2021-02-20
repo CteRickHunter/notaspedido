@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class PedidosController extends Controller
+class ClientesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +13,8 @@ class PedidosController extends Controller
      */
     public function index()
     {
-        //
-        return view ('user.pedidos.index');
+        return view('user.clientes.index');
+
     }
 
     /**
@@ -22,13 +22,6 @@ class PedidosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function clientes()
-    {
-        return redirect('user/pedidos/clientes');
-
-    }
-
     public function create()
     {
         //
