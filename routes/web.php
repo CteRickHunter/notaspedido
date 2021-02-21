@@ -24,3 +24,6 @@ Route::resource('admin/user','AdminUsersController');
 Route::resource('user/pedidos','PedidosController');
 Route::resource('user/clientes','ClientesController');
 Route::resource('user/productos','ProductosController');
+Route::get('user/clientes/confirmado', function(){
+    return view('home');
+});

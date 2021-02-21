@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
+use App\Cliente;
 
 class ClientesController extends Controller
 {
@@ -13,7 +15,8 @@ class ClientesController extends Controller
      */
     public function index()
     {
-        return view('user.clientes.index');
+        $clientes=Cliente::all();
+        return view('user.clientes.index', compact("clientes"));
 
     }
 
@@ -46,7 +49,8 @@ class ClientesController extends Controller
      */
     public function show($id)
     {
-        //
+        $cliente=Cliente::findOrFail($id);
+        return view("user.clientes.show",compact("cliente"));
     }
 
     /**
@@ -81,5 +85,11 @@ class ClientesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function confirmado()
+    {
+        
+        return redirect('home');
     }
 }

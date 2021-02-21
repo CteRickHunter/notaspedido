@@ -10,7 +10,26 @@
                 <!-- <div class="card-header">{{ __('Dashboard') }}</div> -->
                 <div class="card-body">
                     <a href="user/clientes" > <input type="button" value="Elegir Cliente"> </a>
-                    <input type="text" >
+                    
+                    
+
+                    <?php
+                        if (isset($_GET['nombreCli'])) {
+                            $nom=$_GET['nombreCli'];
+                        }
+                        else{
+                            $nom="";
+                        }
+                       
+                    
+                    ?>
+                    <!--
+                    if($nom!=null)
+                        document.getElementById("nombreCliente").value = {{$nom}}; 
+                    endif
+                    -->
+                    <input type="text" id="nombreCliente" name="nombreCliente" value="{{$nom}}" readonly>
+
                 </div>
                 <div class="card-body">
                     @if (session('status'))
