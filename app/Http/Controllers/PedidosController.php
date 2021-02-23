@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Pedido;
+use App\Item;
+use App\Producto;
 
 class PedidosController extends Controller
 {
@@ -13,8 +16,34 @@ class PedidosController extends Controller
      */
     public function index()
     {
-        //
-        return view ('user.pedidos.index');
+        if(isset($_GET['cant'])){
+
+            
+
+            $cant=$_GET['cant'];
+            $id=$_GET['id'];
+            $producto=Producto::findOrFail($id);
+
+            $item= new Item;
+            $item->lineaItem=1;
+            $item->pedido_id=1;
+            $item->descripcion=$producto->descripcionProd;
+            $item->precioItem=$producto->precioProd;
+            $item->cantidadPro=$cant;
+            $item->producto_id=$id;
+            $item->esBonificado=0;
+            $item->save();
+
+        }
+        
+
+       
+
+
+
+        $items=Item::all();
+        
+        return view ('user.pedidos.index',compact("items"));
     }
 
     /**
@@ -32,6 +61,7 @@ class PedidosController extends Controller
     public function create()
     {
         //
+        return view('user/pedidos/create');
     }
 
     /**
@@ -54,6 +84,7 @@ class PedidosController extends Controller
     public function show($id)
     {
         //
+        
     }
 
     /**

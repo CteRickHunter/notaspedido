@@ -10,7 +10,8 @@
 
 <H1> Página de Clientes </H1>
 
-<table class="table-striped">
+
+<table class="table table-striped">
     @foreach($clientes as $cliente)
         <tr>
             <td> {{$cliente->id}} </td>

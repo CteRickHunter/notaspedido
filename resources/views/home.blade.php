@@ -39,7 +39,7 @@
                     @endif
 
                     <!-- {{ __('You are logged in!') }} -->
-                    <a href="user/productos" > <input type="button" value="Elegir Productos"> </a>
+                    <a href="user/pedidos" > <input type="button" value="Elegir Productos"> </a>
                     
                     <div> &nbsp</div>
                     Importe neto:

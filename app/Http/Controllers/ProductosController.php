@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Producto;
 
 class ProductosController extends Controller
 {
@@ -13,7 +14,8 @@ class ProductosController extends Controller
      */
     public function index()
     {
-        return view('user.productos.index');
+        $productos=Producto::all();
+        return view('user.productos.index', compact("productos"));
     }
 
     /**
