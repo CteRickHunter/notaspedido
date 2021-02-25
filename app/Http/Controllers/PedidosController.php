@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Pedido;
 use App\Item;
+use App\Itempedido;
 use App\Producto;
 use App\Dato;
+use Carbon\Carbon;
 
 class PedidosController extends Controller
 {
@@ -78,7 +80,48 @@ class PedidosController extends Controller
 
     public function create()
     {
+        $mensaje=$_GET['nota'];
+                
+
+        // Recojo los Datos
+        $registro=Dato::find(1);
+
         // Generar Pedido e ItemPedido
+        $pedido=new Pedido;
+        $pedido->cliente_id=$registro->idCli;
+        $date=Carbon::now();
+        $date=$date->subHour(3);
+        $pedido->fechaPed=$date->toDateString();
+        $pedido->horaPed=$date->toTimeString();
+        
+        $pedido->user_id=$registro->user_id;
+        $pedido->nombreUsu=""; //Puede agregarse el nombre en tabla "datos"
+
+        $pedido->descuentoPed=0;
+        $pedido->transportePed="";
+        $pedido->notaPed=$mensaje;
+
+        $pedido->save();
+
+        $ult=Pedido::latest()->first()->id;
+                
+        $items=Item::all();
+        foreach($items as $it){
+            $itemPed=new Itempedido;
+            $itemPed->pedido_id=$ult;
+            $itemPed->lineaItem=$it->lineaItem;
+            $itemPed->producto_id=$it->producto_id;
+            $itemPed->cantidadPro=$it->cantidadPro;
+            $itemPed->precioItem=$it->precioItem;
+            $itemPed->esBonificado=$it->esBonificado;
+
+            $itemPed->save();
+            
+        }
+
+
+
+        // Model::latest()->get(); toma el ultimo elemento
 
         // Borrar registro 1 de Item
         DB::table('items')->truncate();

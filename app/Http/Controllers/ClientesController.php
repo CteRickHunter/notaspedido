@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Cliente;
+use App\Dato;
 
 class ClientesController extends Controller
 {
@@ -16,7 +17,15 @@ class ClientesController extends Controller
     public function index()
     {
         //$clientes=Cliente::all();
+        // detecto código del usuario
         $id=$_GET['id'];
+
+        // Cargo Datos
+        $dato=Dato::find(1);
+        $dato->user_id=$id;
+        $dato->save();
+
+        // Recupero listado de clientes del Usuario
         $clientes = Cliente::where('user_id','=', $id)->get();
         return view('user.clientes.index', compact("clientes"));
 

@@ -31,6 +31,8 @@ class HomeController extends Controller
             $registro->save();
 
         }
+
+
         return view('home');
         //return view ('user.pedidos.index');
     }
