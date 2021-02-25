@@ -27,7 +27,7 @@
 
     <div class="row g-3">
         <div class="col">
-            <input type="text" class="form-control"  name="codigoCli" value="{{$cliente->codigoCli}}" readonly>
+            <input type="text" class="form-control"  id="codigoCli" name="codigoCli" value="{{$cliente->codigoCli}}" readonly>
         </div>
         <div class="col">
             <input type="text" class="form-control" id="nombreCli" name="nombreCli" value="{{$cliente->nombreCli}}" readonly>
@@ -45,7 +45,7 @@
 
     <div class="mb-3">
         <input type="text" class="form-control" name="direccionCli" value="{{$cliente->direccionCli}}" readonly>
-        <input type="hidden" class="form-control" id="idCli" name="idCli" value="{{$cliente->id}}" disabled>
+        <input type="hidden" class="form-control" id="idCli" name="idCli" value="{{$cliente->id}}" >
     </div>
 
 
@@ -64,7 +64,9 @@
         
         
         &nbsp &nbsp &nbsp
-        <input type=submit class="btn btn-primary btn-block" value="Salir sin Confirmar">
+        <a href="/home">
+        <input type="button" class="btn btn-primary btn-block" value="Salir sin Confirmar">
+        </a>
     </div>
   </div>
   </div>

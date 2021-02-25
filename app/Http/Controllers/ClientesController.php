@@ -15,7 +15,9 @@ class ClientesController extends Controller
      */
     public function index()
     {
-        $clientes=Cliente::all();
+        //$clientes=Cliente::all();
+        $id=$_GET['id'];
+        $clientes = Cliente::where('user_id','=', $id)->get();
         return view('user.clientes.index', compact("clientes"));
 
     }

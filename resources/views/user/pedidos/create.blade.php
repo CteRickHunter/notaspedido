@@ -9,7 +9,7 @@
 <!-- <p><input type="submit" value="Logout"></p> -->
 
 <div class="container-lg">
-<H1>  Página para ingresar cantidad </H1>
+<H1>  Página para cerrar pedido </H1>
 </div>
 
 

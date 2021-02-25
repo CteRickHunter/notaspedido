@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<H1 class="row justify-content-center">  Ingreso de Pedidos {{ Auth::user()->name }}</H1>
+<H1 class="row justify-content-center">  Ingreso de Pedidos {{ Auth::user()->name }} </H1>
 <form>
 <div class="container">
     <div class="row justify-content-center">
@@ -9,8 +9,8 @@
             <div class="card">
                 <!-- <div class="card-header">{{ __('Dashboard') }}</div> -->
                 <div class="card-body">
+                    <a href="user/clientes" > <input type="button" value="Elegir Cliente"> </a>
                     
-                    <a href="user/clientes?id={{ Auth::user()->id }}" > <input type="button" class="btn btn-primary btn-block" value="Elegir Cliente"> </a>
                     
 
                     <?php
@@ -30,8 +30,6 @@
                     endif
                     -->
                     <input type="text" id="nombreCliente" name="nombreCliente" value="{{$nom}}" readonly>
-                    
-
 
                 </div>
                 <div class="card-body">
@@ -42,16 +40,27 @@
                     @endif
 
                     <!-- Ver si pasa el nombre  -->
-
-                    @if($nom!="")
-                        <a href="user/pedidos?cliente={{$nom}}" > <input type="button" class="btn btn-primary btn-block" value="Elegir Productos"> </a>
+                    <a href="user/pedidos?cliente={{$nom}}" > <input type="button" value="Elegir Productos"> </a>
                     
-                    @else
-                        <input type="button" class="btn btn-secondary btn-block" value="Elegir Productos">
-                    @endif
-                    </br></br>
-                    <input type=submit class="btn btn-primary btn-block" value="Limpiar datos">
-                    
+                    <div> &nbsp</div>
+                    Importe neto:
+                    <input type="text" size="12" margin="25px">
+                    IVA:
+                    <input type="text" size="10">
+                    SubTotal:
+                    <input type="text" size="12">
+                    <div> &nbsp</div>
+                    Descuento:
+                    <input type="text" size="10">
+                    &nbsp &nbsp &nbsp &nbsp &nbsp
+                    Imp. Total:
+                    <input type="text" size="12">
+                    <div> &nbsp</div>
+                    <div style="text-align:center;">
+                        <a href="user/pedidos" > <input type="button" class="btn btn-primary btn-block" value="Enviar Pedido"> </a>
+                        &nbsp &nbsp &nbsp
+                        <input type=submit class="btn btn-primary btn-block" value="Limpiar datos">
+                    </div>
                 </div>
             </div>
         </div>

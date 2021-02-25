@@ -13,46 +13,25 @@
 <!-- <p><input type="submit" value="Logout"></p> -->
 </form>
 <div class="container-lg">
-    <div class="col-md-8">
+    <div class="col-md-4">
         <H1>  Detalle del Pedido </H1>
         
         <input type="text" name="cliente" size="50"  value="{{$registro->nombreCli}}" disabled />
-
-
         <div class="container">
-            <div class="row">
-                <div class="col">
-                    <table class="table  table-bordered border-primary" >
-                    <tr class="table-info">
+           
+            <table class="table table-sm table-bordered border-primary" >
+                <tr>
                     <th> Neto </th>
                     <th> IVA </th> 
                     <th> Total </th>
-                    </tr>
-                    <tr class="table-dark">
+                </tr>
+                <tr>
                     <td> <?PHP echo number_format(floatval($tot), 2, ',', '.'); ?></td>
                     <td> <?PHP echo number_format(floatval($tot*0.21), 2, ',', '.'); ?> </td>
                     <td> <?PHP echo number_format(floatval($tot*1.21), 2, ',', '.'); ?></td>
-                    </tr>
-                    </table>
-                </div>
-                <div class="col">
-                    <div class="input-group">
-                    <span class="input-group-text">With textarea</span>
-                    <textarea class="form-control" aria-label="With textarea"></textarea>
-                    </div>
-                </div>
-            </div>
+                </tr>
+            </table>
         </div>
-
-
-
-
-
-
-        
-
-
-        
         <!--    
             <td> <input type="text" name="total" size="20" value="${{$tot}}" disabled /> </td>
                     <td> <input type="text" name="iva" size="15" value="${{$tot*0.21}}" disabled /> </td> 
@@ -66,7 +45,7 @@
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item" href="productos">Agregar Producto</a></li>
                 <li><a class="dropdown-item" > - - - - - - - - - - </a></li>
-                <li><a class="dropdown-item" href="pedidos/create">Terminar Pedido</a></li>
+                <li><a class="dropdown-item" href="#">Terminar Pedido</a></li>
             </ul>
         </div>
 
