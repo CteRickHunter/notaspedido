@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+
+use App\Mail\OrderShipped;
+use App\Mail\Order;
 use App\Pedido;
 use App\Item;
 use App\Itempedido;
@@ -80,11 +84,18 @@ class PedidosController extends Controller
 
     public function create()
     {
+       
         $mensaje=$_GET['nota'];
                 
 
         // Recojo los Datos
         $registro=Dato::find(1);
+        $textoMail="";
+        $textoVendedor="Pedido Vend".strval($registro->user_id);
+        $textoCliente="Cliente: ".$registro->nombreCli;
+        $textoMail.="Pedido Nro: ".strval($registro->numPed)."\n";
+        $date=Carbon::now(); // Determino fecha y hora
+        $textoMail.=$date."\n\n";
 
         // Generar Pedido e ItemPedido
         $pedido=new Pedido;
@@ -106,6 +117,14 @@ class PedidosController extends Controller
         $ult=Pedido::latest()->first()->id;
                 
         $items=Item::all();
+        // Preparo acumuladores
+        $subtotal=0;
+        $total=0;
+        $iva=0.21;
+        $final=1.21;
+       
+        $lineas=array(array());
+        $i=0;
         foreach($items as $it){
             $itemPed=new Itempedido;
             $itemPed->pedido_id=$ult;
@@ -115,10 +134,40 @@ class PedidosController extends Controller
             $itemPed->precioItem=$it->precioItem;
             $itemPed->esBonificado=$it->esBonificado;
 
+            // Calculo valores
+            $subtotal=$it->cantidadPro * $it->precioItem;
+            $total+=$subtotal;
+
+            //agrego datos al mail
+            $lineas[$i][0]=$it->lineaItem;
+            $lineas[$i][5]=$it->cantidadPro;
+            $lineas[$i][1]=$it->producto_id;
+            $lineas[$i][2]=$it->descripcion;
+            $lineas[$i][3]=$it->precioItem;
+            $lineas[$i][4]=$it->$subtotal;
+            
+           // $textoMail.=$it->lineaItem." - ". $it->cantidadPro ." - " . $it->producto_id . " - " . $it->descripcion . " - " . $it->precioItem . " - " . $subtotal . "\n";
+            $i++;
             $itemPed->save();
             
         }
 
+        // Finalizo datos del mail
+        $textoMail.="Neto:    ".$total."\n";
+        $textoMail.=" IVA:    ".$total*$iva."\n";
+        $textoMail.="Imp.Total:".$total*$final."\n";
+
+        $order = new \stdClass();
+        $order->vendedor = $textoVendedor;
+        $order->cliente = $textoCliente;
+        $order->lineas=$lineas;
+        
+        //Mail::to($request->user())->send(new OrderShipped($order));
+        Mail::to("ocampilongo@yahoo.com.ar")->send(new OrderShipped($order));
+      //  Mail::send("emails.carta",$datos,function($info){
+       //     $info->to("osvaldocampilongo@gmail.com","Pedidos")->subject("Pedido solicitado");
+
+       // });
 
 
         // Model::latest()->get(); toma el ultimo elemento
